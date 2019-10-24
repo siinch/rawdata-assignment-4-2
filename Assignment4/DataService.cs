@@ -21,7 +21,10 @@ namespace Assignment4
 
         public Category GetCategory(int idIn)
         {   
-            return new Category();
+            using var db = new NorthwindContext();
+            return db.Categories
+                .Where(x => x.Id == idIn)
+                .Select(x => x).ToList().First();
         }
         
         public Category CreateCategory(string inName, string inDescription)
