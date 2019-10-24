@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace Assignement4
 {
-    // [Table("categories")]
+    [Table("categories")]
     public class Category
     {
+        [Column("categoryid")]
         public int Id { get; set; }
+        [Column("categoryname")]
         public string Name { get; set; }
 
-        //[Column("description")]
+        [Column("description")]
         public string Description { get; set; }
     }
 }
