@@ -10,8 +10,8 @@ namespace Assignment4
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public  string CategoryName { get; set; }
-        public double UnitPrice { get; set; }
-        public int QuantityPerUnit { get; set; }
+        public int UnitPrice { get; set; }
+        public string QuantityPerUnit { get; set; }
         public int UnitsInStock { get; set; }
     }
 }

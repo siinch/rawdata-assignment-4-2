@@ -15,7 +15,8 @@ namespace Assignment4
         
         public List<Category> GetCategories()
         {   
-            return new List<Category>();
+            using var db = new NorthwindContext();
+            return db.Categories.ToList();
         }
 
         public Category GetCategory(int idIn)
