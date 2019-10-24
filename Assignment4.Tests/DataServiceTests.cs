@@ -1,13 +1,14 @@
 using System;
 using System.Linq;
+using Assignement4;
 using Xunit;
 
 namespace Assignment4.Tests
 {
     public class DataServiceTests
     {
-        /* Categories */
-
+        // Categories
+        
         [Fact]
         public void Category_Object_HasIdNameAndDescription()
         {
@@ -93,8 +94,7 @@ namespace Assignment4.Tests
         }
 
 
-        /* products */
-
+        // products
         [Fact]
         public void Product_Object_HasIdNameUnitPriceQuantityPerUnitAndUnitsInStock()
         {
@@ -123,7 +123,7 @@ namespace Assignment4.Tests
             Assert.Equal(12, products.Count);
             Assert.Equal("Chai", products.First().Name);
             Assert.Equal("Beverages", products.First().CategoryName);
-            Assert.Equal("Lakkalikööri", products.Last().Name);
+            Assert.Equal("Lakkalikï¿½ï¿½ri", products.Last().Name);
         }
 
         [Fact]
@@ -132,11 +132,11 @@ namespace Assignment4.Tests
             var service = new DataService();
             var products = service.GetProductByName("em");
             Assert.Equal(4, products.Count);
-            Assert.Equal("NuNuCa Nuß-Nougat-Creme", products.First().ProductName);
+            Assert.Equal("NuNuCa Nuï¿½-Nougat-Creme", products.First().ProductName);
             Assert.Equal("Flotemysost", products.Last().ProductName);
         }
 
-        /* orders */
+        // orders
         [Fact]
         public void Order_Object_HasIdDatesAndOrderDetails()
         {
@@ -168,7 +168,7 @@ namespace Assignment4.Tests
         }
 
 
-        /* orderdetails */
+        // orderdetails
         [Fact]
         public void OrderDetails_Object_HasOrderProductUnitPriceQuantityAndDiscount()
         {
