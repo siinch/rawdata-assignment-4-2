@@ -70,9 +70,19 @@ namespace Assignment4
                 return false;
         }
 
-        public bool UpdateCategory(int idIn, string inName, string inDescription)
+        public bool UpdateCategory(int inId, string inName, string inDescription)
         {
-            return true;
+            using var db = new NorthwindContext();
+            var category = db.Categories.Find(inId);
+            if (category != null)
+            {
+                category.Name = inName;
+                category.Description = inDescription;
+                db.SaveChanges();
+                return true;
+            }
+            else 
+                return false;
         }
 
         public Product GetProduct(int inId)
