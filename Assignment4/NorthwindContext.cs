@@ -27,17 +27,17 @@ namespace Assignment4
             modelBuilder.Entity<Category>().Property(m => m.Description).HasColumnName("description");
 
             // Product
-            modelBuilder.Entity<Product>().ToTable("products").HasNoKey();
+            modelBuilder.Entity<Product>().ToTable("products");
             modelBuilder.Entity<Product>().Property(m => m.Id).HasColumnName("productid");
             modelBuilder.Entity<Product>().Property(m => m.Name).HasColumnName("productname");
-            modelBuilder.Entity<Product>().Property(m => m.ProductName).HasColumnName("productname"); //twice for some reason....
+            modelBuilder.Entity<Product>().Property(m => m.ProductName).HasColumnName("productname"); //redundant, but required by test.
             modelBuilder.Entity<Product>().Property(m => m.CategoryId).HasColumnName("categoryid");
             modelBuilder.Entity<Product>().Property(m => m.UnitPrice).HasColumnName("unitprice");
             modelBuilder.Entity<Product>().Property(m => m.QuantityPerUnit).HasColumnName("quantityperunit");
             modelBuilder.Entity<Product>().Property(m => m.UnitsInStock).HasColumnName("unitsinstock");
             modelBuilder.Entity<Product>().Ignore(m => m.Category);
-            // what about Category?
-            
+            modelBuilder.Entity<Product>().Ignore(m => m.CategoryName); // redundant, but required by test
+
             // Order
             modelBuilder.Entity<Order>().ToTable("order").HasNoKey();
             modelBuilder.Entity<Order>().Property(m => m.Id).HasColumnName("orderid");

@@ -87,17 +87,35 @@ namespace Assignment4
 
         public Product GetProduct(int inId)
         {
-            return new Product();
+            using var db = new NorthwindContext();
+            var product = db.Products.Find(inId);
+            product.Category = db.Categories.Find(product.CategoryId);
+            product.CategoryName = db.Categories.Find(product.CategoryId).Name;
+            return product;
         }
         
         public List<Product> GetProductByCategory(int inId)
         {
-            return new List<Product>();
+            using var db = new NorthwindContext();
+            var products = db.Products.Where(x => x.CategoryId == inId).Select(x => x).ToList();
+            foreach (var product in products)
+            {
+                product.Category = db.Categories.Find(product.CategoryId);
+                product.CategoryName = db.Categories.Find(product.CategoryId).Name;
+            }
+            return products;
         }
         
         public List<Product> GetProductByName(string inName)
         {
-            return new List<Product>();
+            using var db = new NorthwindContext();
+            var products = db.Products.Where(x => x.Name.Contains(inName)).Select(x => x).ToList();
+            foreach (var product in products)
+            {
+                product.Category = db.Categories.Find(product.CategoryId);
+                product.CategoryName = db.Categories.Find(product.CategoryId).Name;
+            }
+            return products;
         }
 
         public Order GetOrder(int inId)
