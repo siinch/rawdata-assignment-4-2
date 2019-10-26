@@ -120,22 +120,56 @@ namespace Assignment4
 
         public Order GetOrder(int inId)
         {
-            return new Order();
+            using var db = new NorthwindContext();
+            var order = db.Orders.Find(inId);
+            order.OrderDetails = db.OrderDetails.Where(x => x.OrderId == order.Id).Select(x => x).ToList();
+            foreach (var orderDetail in order.OrderDetails)
+            {
+                orderDetail.Order = order;
+                orderDetail.Product = GetProduct(orderDetail.ProductId);
+            }
+            return order;
         }
         
         public List<Order> GetOrders()
         {
-            return new List<Order>();
+            using var db = new NorthwindContext();
+            var orders = db.Orders.ToList();
+            foreach (var order in orders)
+            {
+                order.OrderDetails = db.OrderDetails.Where(x => x.OrderId == order.Id).Select(x => x).ToList();
+                foreach (var orderDetail in order.OrderDetails)
+                {
+                    orderDetail.Order = order;
+                    orderDetail.Product = GetProduct(orderDetail.ProductId);
+                }
+            }
+            return orders;
         }
 
         public List<OrderDetails> GetOrderDetailsByOrderId(int inId)
         {
-            return new List<OrderDetails>();
+            using var db = new NorthwindContext();
+            var order = db.Orders.Find(inId);
+            order.OrderDetails = db.OrderDetails.Where(x => x.OrderId == order.Id).Select(x => x).ToList();
+            foreach (var orderDetail in order.OrderDetails)
+            {
+                orderDetail.Order = order;
+                orderDetail.Product = GetProduct(orderDetail.ProductId);
+            }
+            return order.OrderDetails;
         }
         
         public List<OrderDetails> GetOrderDetailsByProductId(int inId)
         {
-            return new List<OrderDetails>();
+            using var db = new NorthwindContext();
+            var orderDetails = db.OrderDetails.Where(x => x.ProductId == inId).Select(x => x).ToList();
+            foreach (var orderDetail in orderDetails)
+            {
+                orderDetail.Order = GetOrder(orderDetail.OrderId);
+                orderDetail.Product = GetProduct(orderDetail.ProductId);
+            }
+            return orderDetails;
         }
     }
 }
