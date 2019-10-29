@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignement4
+namespace Assignment4
 {
     [Table("categories")]
     public class Category

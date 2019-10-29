@@ -4,13 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Assignement4;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Assignment4
 {
-    public class DataService // add interface when ready : IDataService
+    public class DataService : IDataService
     {
      
         
