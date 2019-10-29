@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Assignment4
 {
-    public class DataService
+    public class DataService // add interface when ready : IDataService
     {
      
         
