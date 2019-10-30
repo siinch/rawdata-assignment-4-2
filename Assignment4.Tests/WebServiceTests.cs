@@ -4,18 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Engine.ClientProtocol;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Assignment4.Tests
 {
     
     public class WebServiceTests
     {
-        private const string CategoriesApi = "http://localhost:5001/api/categories";
-        private const string ProductsApi = "http://localhost:5001/api/products";
+        private const string CategoriesApi = "http://localhost:5000/api/categories";
+        private const string ProductsApi = "http://localhost:5000/api/products";
 
         /* /api/categories */
 
@@ -75,7 +78,7 @@ namespace Assignment4.Tests
 
             var update = new
             {
-                Id = category["id"],
+                Id = category["id"], 
                 Name = category["name"] + "Updated",
                 Description = category["description"] + "Updated"
             };

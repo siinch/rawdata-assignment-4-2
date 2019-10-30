@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
 using Assignment4;
 
 
@@ -35,19 +36,18 @@ namespace WebService
         }
 
         [HttpPost]
-        public ActionResult CreateCategory([FromBody] Category category)
+        public IActionResult CreateCategory([FromBody] Category category)
         {
-            _dataService.CreateCategory(category.Name, category.Description);
-
-            return Ok(category);
+            return Created("", _dataService.CreateCategory(category.Name, category.Description));
         }
         
         [HttpPut("{categoryId}")]
-        public ActionResult UpdateCategory(int inId, string inName, string inDescription)
+        public ActionResult UpdateCategory([FromBody] Category category)
         {
-            if (!_dataService.UpdateCategory(inId, inName, inDescription))
+            if (!_dataService.UpdateCategory(category.Id, category.Name, category.Description))
                 return NotFound();
-            return NoContent();
+            
+            return Ok();
         }
 
         [HttpDelete("{categoryId}")]
@@ -55,7 +55,8 @@ namespace WebService
         {
             if (!_dataService.DeleteCategory(categoryId))
                 return NotFound();
-            return NoContent();
+
+            return Ok();
         }
 
 
