@@ -17,7 +17,36 @@ namespace WebService
         {
             _dataService = dataService;
         }
+
+        [HttpGet("{productid}")]
+        public ActionResult<Product> GetProduct(int inId)
+        {
+            var product = _dataService.GetProduct(inId);
+
+            if (product == null) return NotFound();
+            
+            return Ok(product);
+        }
+        /*
+        [HttpGet("{categoryId}")]
+        public ActionResult<IEnumerable<Product>> GetProductByCategory(int inId)
+        {
+            var products = _dataService.GetProductByCategory(inId);
+
+            if (products.Count == 0) return NotFound(products);
+
+            return Ok(products);
+        }
         
-        
+        [HttpGet("{productName}")]
+        public ActionResult<IEnumerable<Product>> GetProductByName(string inName)
+        {
+            var products = _dataService.GetProductByName(inName);
+
+            if (products.Count == 0) return NotFound(products);
+
+            return Ok(products);
+        }
+        */
     }
 }

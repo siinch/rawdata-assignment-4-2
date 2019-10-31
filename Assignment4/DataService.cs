@@ -88,8 +88,11 @@ namespace Assignment4
         {
             using var db = new NorthwindContext();
             var product = db.Products.Find(inId);
-            product.Category = db.Categories.Find(product.CategoryId);
-            product.CategoryName = db.Categories.Find(product.CategoryId).Name;
+            if (product != null)
+            {
+                product.Category = db.Categories.Find(product.CategoryId);
+                product.CategoryName = db.Categories.Find(product.CategoryId).Name;
+            }
             return product;
         }
         
