@@ -18,7 +18,7 @@ namespace WebService
             _dataService = dataService;
         }
 
-        [HttpGet("{productid}")]
+        [HttpGet("{inId}")]
         public ActionResult<Product> GetProduct(int inId)
         {
             var product = _dataService.GetProduct(inId);
@@ -27,8 +27,8 @@ namespace WebService
             
             return Ok(product);
         }
-        /*
-        [HttpGet("{categoryId}")]
+        
+        [HttpGet("category/{inId}")]
         public ActionResult<IEnumerable<Product>> GetProductByCategory(int inId)
         {
             var products = _dataService.GetProductByCategory(inId);
@@ -38,7 +38,7 @@ namespace WebService
             return Ok(products);
         }
         
-        [HttpGet("{productName}")]
+        [HttpGet("name/{inName}")]
         public ActionResult<IEnumerable<Product>> GetProductByName(string inName)
         {
             var products = _dataService.GetProductByName(inName);
@@ -47,6 +47,6 @@ namespace WebService
 
             return Ok(products);
         }
-        */
+        
     }
 }

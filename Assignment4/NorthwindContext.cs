@@ -1,7 +1,29 @@
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assignment4
 {
+    static class ModelBuilderExtensions
+    {
+        public static void CreateMap(this ModelBuilder modelBuilder, params string[] names)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                entityType.SetTableName(entityType.GetTableName().ToLower());
+                foreach (var property in entityType.GetProperties())
+                {
+                    var propertyName = property.Name.ToLower();
+                    var entityName = "";
+                    property.SetColumnName(propertyName);
+
+                    if (names.Contains(property.Name)) 
+                        entityName = entityType.ClrType.Name.ToLower();
+                       
+                    property.SetColumnName(entityName + propertyName);
+                }
+            }
+        }
+    }
     public class NorthwindContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
